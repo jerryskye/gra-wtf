@@ -1,6 +1,13 @@
 import * as vars from './vars.js';
 import { keysUpdate } from './keys.js';
 
+function hittest(a, b) {
+  return ((a.x < (b.x + b.w)) &&
+    ((a.x + a.w) > b.x) &&
+    (a.y < (b.y + b.h)) &&
+    ((a.y + a.h) > b.y));
+}
+
 export function initEnemies() {
   var k = 0;
   for(var i = 0; i < 4; i++)
@@ -15,6 +22,15 @@ export function moveEnemies() {
       vars.enemies[i].x += vars.enemy_speed;
       if(vars.enemies[i].x > (vars.canvas.width - vars.hero.w) || vars.enemies[i].x < 0)
         dropdown = true;
+
+      if(hittest(vars.enemies[i],vars.bullet)) {
+        console.log("hit");
+        vars.enemies[i].visible = false;
+        vars.bullet.visible = false;
+        vars.bullet.x = vars.hero.x + 30;
+        vars.bullet.y = 450;
+        vars.score += 10;
+      }
     }
   }
   if(dropdown) {

@@ -8,6 +8,7 @@ export var context = canvas.getContext('2d');
 canvas.width = 1400;
 canvas.height = 760;
 export var gameOver = 0;
+export var score = 0;
 
 export var bgImage = new Image();
 bgImage.src = backgroundImageUrl;
@@ -23,4 +24,4 @@ export var enemy_speed = 3;
 
 export var bulletImage = new Image();
 bulletImage.src = bulletImageUrl;
-export var bullet = {image: bulletImage, x: 0, y: 500, speed: 4};
+export var bullet = {image: bulletImage, x: 0, y: 500, w: 16, h: 16, speed: 4};
