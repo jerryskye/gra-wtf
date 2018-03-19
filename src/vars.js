@@ -25,3 +25,7 @@ export var enemy_speed = 3;
 export var bulletImage = new Image();
 bulletImage.src = bulletImageUrl;
 export var bullet = {image: bulletImage, x: 0, y: 500, w: 16, h: 16, speed: 4};
+
+export var life = 10;
+export var enemiesBullet = [];
+export var enemyBullets = 1;
