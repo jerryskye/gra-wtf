@@ -3,7 +3,7 @@ import * as THREE from 'three';
 var scene, camera, renderer, mesh, square;
 var tx = 4.5;
 var ty = 0;
-var speed = 0.005;
+var speed = 0.05;
 var up = true;
 var down = false;
 var left = false;
@@ -25,8 +25,9 @@ function createSquare() {
 
 export function init() {
   var aspect = window.innerWidth / window.innerHeight;
-  camera = new THREE.PerspectiveCamera(45, aspect, 1, 1, 1000);
+  camera = new THREE.PerspectiveCamera(45, aspect, 1, 1000);
   camera.position.z = 5;
+  camera.position.x = 0;
 
   var material = new THREE.MeshBasicMaterial({color: 0xff0000});
   square = new THREE.Mesh(createSquare(), material);
@@ -53,6 +54,7 @@ export function animate() {
 
   square.position.x = tx;
   square.position.y = ty;
+//   console.log("x " + square.position.x + ", y " + square.position.y);
   tx += speed;
   renderer.render(scene, camera);
   if(square.position.y > window.innerHeight/275){
