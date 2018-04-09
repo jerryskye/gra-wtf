@@ -1,5 +1,7 @@
 import { init, main, animate } from './example01.js';
 
-init();
-//main();
-animate();
+document.addEventListener("DOMContentLoaded", function(event) {
+  init();
+  main();
+  animate();
+});
