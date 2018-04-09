@@ -1,4 +1,5 @@
-import { init, main } from './example01.js';
+import { init, main, animate } from './example01.js';
 
 init();
-main();
+//main();
+animate();
