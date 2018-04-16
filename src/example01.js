@@ -54,7 +54,7 @@ export function animate() {
 
   square.position.x = tx;
   square.position.y = ty;
-  
+
   tx += speed;
   renderer.render(scene, camera);
   if(square.position.y > window.innerHeight/275){
