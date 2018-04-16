@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 
 var scene, camera, renderer, mesh, square;
-var tx = 4.5;
-var ty = 0;
-var speed = 0.05;
+var tx = -3.5;
+var ty = 2;
+var speed = 0.1;
 var up = true;
 var down = false;
 var left = false;
@@ -27,7 +27,6 @@ export function init() {
   var aspect = window.innerWidth / window.innerHeight;
   camera = new THREE.PerspectiveCamera(45, aspect, 1, 1000);
   camera.position.z = 5;
-  camera.position.x = 0;
 
   var material = new THREE.MeshBasicMaterial({color: 0xff0000});
   square = new THREE.Mesh(createSquare(), material);
@@ -40,7 +39,7 @@ export function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   document.body.appendChild(renderer.domElement);
-  //window.addEventListener('resize', onWindowResize, false);
+  //window.addEventListener('resize', onWindowResize, false); //this doesn't work
 }
 
 function onWindowResize() {
@@ -55,24 +54,23 @@ export function animate() {
   square.position.x = tx;
   square.position.y = ty;
 
-  tx += speed;
   renderer.render(scene, camera);
-  if(square.position.y > window.innerHeight/275){
+  if(square.position.y > 2){
       up = false;
       right = true;
       square.material.color.setHex(0xff0000);
   }
-  if(square.position.x > window.innerWidth/250){
+  if(square.position.x > 3.5){
       right = false;
       down = true;
       square.material.color.setHex( 0x00ff00 );
   }
-  if(square.position.y < -2.5){
+  if(square.position.y < -2){
       left = true;
       down = false;
       square.material.color.setHex( 0x0000ff );
   }
-  if(square.position.y < -2/5 && square.position.x < -6){
+  if(square.position.y < -2 && square.position.x < -3.5){
       left = false;
       up = true;
       square.material.color.setHex( 0xff00ff );
@@ -86,7 +84,7 @@ export function animate() {
   if(left)
       tx -= speed;
 
-  square.rotation.z += 2 * Math.PI / 180
+  square.rotation.z += Math.PI / 90
   renderer.render(scene, camera);
 }
 
