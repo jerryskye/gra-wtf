@@ -1,8 +1,40 @@
 import * as THREE from 'three';
+import * as dat from 'dat.gui';
 import '../node_modules/three/examples/js/controls/TrackballControls.js';
 
 var scene, camera, renderer, mesh, controls;
 var rot = 0;
+
+function buildGUI() {
+  var gui = new dat.GUI({autoPlace: false});
+  var objectsMenu = gui.addFolder('Objects:');
+  var object = objectsMenu.addFolder('Torus');
+  object.add(mesh, 'visible').name('Visible:').onChange(
+      function (value) {
+          mesh.visibility = value;
+      }
+  );
+
+  //Dodanie palety kolorów.
+  var Config = function () {
+      this.color = "#ffffff";
+  }
+
+  var conf = new Config();
+  object.addColor(conf, 'color').name('Color').onChange(
+      function (value) {
+          value = value.replace('#','0x');
+          mesh.material.color.setHex(value);
+      }
+  );
+
+  objectsMenu.open();
+
+  var customContainer = document.getElementById('gui');
+  console.log(customContainer);
+  customContainer.appendChild(gui.domElement);
+}
+
 export function init() {
   var aspect = window.innerWidth / window.innerHeight;
   camera = new THREE.PerspectiveCamera(45, aspect, 1, 10000);
@@ -20,12 +52,14 @@ export function init() {
   renderer = new THREE.WebGLRenderer();
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x0000ff, 1);
 
-  controls = new THREE.TrackballControls(camera);
+  buildGUI();
+  document.body.appendChild(renderer.domElement);
+  controls = new THREE.TrackballControls(camera, renderer.domElement);
   controls.rotateSpeed = 5;
   controls.zoomSpeed = 1;
   controls.panSpeed = 0.1;
-  document.body.appendChild(renderer.domElement);
   //window.addEventListener('resize', onWindowResize, false);
 }
 
