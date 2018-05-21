@@ -115,7 +115,7 @@ export function init() {
     //new THREE.MeshLambertMaterial());
   scene.add(mesh);
 
-  var light = new THREE.PointLight(0xffffff, 1, 500);
+  var light = new THREE.DirectionalLight(0xffffff, 1, 500);
   light.position.set(10, 10, 50);
   scene.add(light);
 
