@@ -1,7 +1,4 @@
-import { canvas } from './vars.js'
-import { initEnemies, initEnemiesBullet, main } from './game.js'
+import { init, animate } from './example05.js';
 
-document.body.appendChild(canvas);
-initEnemies();
-initEnemiesBullet();
-main();
+init();
+//animate();
